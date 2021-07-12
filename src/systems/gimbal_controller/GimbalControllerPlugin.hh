@@ -42,7 +42,7 @@ namespace systems
        public: GimbalControllerPlugin();
 
        /// \brief Destructor.
-       public: ~GimbalControllerPlugin();
+       public: ~GimbalControllerPlugin() override;
 
        // Documentation inherited
        public: void Configure(const Entity &_entity,
