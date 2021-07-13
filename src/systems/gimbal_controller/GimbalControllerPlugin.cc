@@ -256,7 +256,7 @@ void GimbalControllerPlugin::Configure(const Entity &_entity,
       }
       else
       {
-	      ignwarn << "joint_pitch ["<< pitchJointName <<"] does not exist?\n"
+         ignwarn << "joint_pitch ["<< pitchJointName <<"] does not exist?\n"
                  << std::endl;
       }
    }
