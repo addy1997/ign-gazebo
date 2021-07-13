@@ -34,7 +34,7 @@ namespace systems
     class GimbalControllerPluginPrivate;
 
     /// \brief Plugin for controlling a 3-link gimbal or similar system.
-    /// This plugin, in response to the String messages coming from 
+    /// This plugin, in response to the String messages coming from
     /// OnYawStringMsg, OnRollStringMsg, and OnPitchStringMsg functions,
     /// tilts the corresponding joints at a particular rate.
     ///
@@ -42,13 +42,13 @@ namespace systems
     ///
     /// #Parameters
     ///
-    /// '<joint_yaw></joint_yaw>': Name of the link linking the yaw_joint 
+    /// '<joint_yaw></joint_yaw>': Name of the link linking the yaw_joint
     ///                            to it's parent link.
     /// 
-    /// '<joint_roll></joint_roll>': Name of the link linking the roll_joint 
+    /// '<joint_roll></joint_roll>': Name of the link linking the roll_joint
     ///                              to it's parent link.
-    /// 
-    /// '<joint_pitch></joint_pitch>': Name of the link linking the pitch_joint 
+    ///
+    /// '<joint_pitch></joint_pitch>': Name of the link linking the pitch_joint
     ///                                to it's parent link.
 
     class GimbalControllerPlugin :
