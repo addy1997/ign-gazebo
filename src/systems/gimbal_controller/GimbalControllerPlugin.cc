@@ -196,7 +196,7 @@ void GimbalControllerPlugin::Configure(const Entity &_entity,
 
       if(this->dataPtr->model.JointByName(_ecm, "yawJointName"))
       {
-	      this->dataPtr->yawJoint = this->dataPtr->model.JointByName(
+         this->dataPtr->yawJoint = this->dataPtr->model.JointByName(
             _ecm, "yawJointName");
       }
       else
