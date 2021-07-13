@@ -44,7 +44,7 @@ namespace systems
     ///
     /// '<joint_yaw></joint_yaw>': Name of the link linking the yaw_joint
     ///                            to it's parent link.
-    /// 
+    ///
     /// '<joint_roll></joint_roll>': Name of the link linking the roll_joint
     ///                              to it's parent link.
     ///

@@ -77,7 +77,7 @@ class ignition::gazebo::systems::GimbalControllerPluginPrivate
    public: double ShortestAngularDistance(double _from, double _to);
 
    /// \brief fuction returns elementary rotation matrix
-   /// \param[in] r11, r12, r21, r31, r32 are the 
+   /// \param[in] r11, r12, r21, r31, r32 are the
    /// elements of the rotation matrix
    /// \returns arctangent of the elements of rotation matrix
    public: ignition::math::Vector3d ThreeAxisRot(double r11, double r12,
@@ -267,7 +267,7 @@ void GimbalControllerPlugin::Configure(const Entity &_entity,
              << pitchJointName <<"' " <<std::endl;
    }
    // get imu sensor
-   this->dataPtr->imuName = _sdf->Get("imuName", 
+   this->dataPtr->imuName = _sdf->Get("imuName",
       static_cast<std::string>("imu_sensor")).first;
 }
 
@@ -281,12 +281,12 @@ void GimbalControllerPluginPrivate::Init(const EntityComponentManager &_ecm)
 
    // receive roll command via ignition transport
    std::string rollTopic = this->model.Name(_ecm) + "/gimbal_roll_cmd";
-   this->node.Subscribe(rollTopic, 
+   this->node.Subscribe(rollTopic,
       &GimbalControllerPluginPrivate::OnRollStringMsg);
 
    // receive yaw command via ignition transport
    std::string yawTopic = this->model.Name(_ecm) + "/gimbal_yaw_cmd";
-   this->node.Subscribe(yawTopic, 
+   this->node.Subscribe(yawTopic,
       &GimbalControllerPluginPrivate::OnYawStringMsg);
 
    // publish pitch status via ignition transport
@@ -328,7 +328,7 @@ ignition::math::Vector3d GimbalControllerPluginPrivate::ThreeAxisRot(double r11,
    double r12, double r21, double r31, double r32)
 {
    return ignition::math::Vector3d(atan2
-      (r31,r32), asin (r21), atan2(r11, r12));
+      (r31, r32), asin (r21), atan2(r11, r12));
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -370,11 +370,11 @@ void GimbalControllerPlugin::PreUpdate(const UpdateInfo &_info,
                 << "] not found, abort ArduPilot plugin." << "\n";
          return;
       }
-      this->dataPtr->node.Subscribe(topic, &GimbalControllerPluginPrivate::imuCb, 
-         this->dataPtr.get());
+      this->dataPtr->node.Subscribe(topic,
+         &GimbalControllerPluginPrivate::imuCb);
    }
 
-   if(!this->dataPtr->pitchJoint || !this->dataPtr->rollJoint || 
+   if(!this->dataPtr->pitchJoint || !this->dataPtr->rollJoint ||
       !this->dataPtr->yawJoint)
       return;
 
@@ -387,7 +387,7 @@ void GimbalControllerPlugin::PreUpdate(const UpdateInfo &_info,
    else if(_info.simTime > this->dataPtr->lastControllerUpdateTime)
    {
       // Time delta
-      std::chrono::duration<double> dt  = 
+      std::chrono::duration<double> dt =
       (this->dataPtr->lastControllerUpdateTime - _info.simTime);
 
       // pitch joint position
@@ -400,8 +400,9 @@ void GimbalControllerPlugin::PreUpdate(const UpdateInfo &_info,
 
       if (pjfcComp == nullptr)
       {
-         pjfcComp = _ecm.Component<components::JointForceCmd>(_ecm.CreateComponent(
-            this->dataPtr->pitchJoint, components::JointForceCmd({0})));
+         pjfcComp = _ecm.Component<components::JointForceCmd>(
+            _ecm.CreateComponent(this->dataPtr->pitchJoint,
+               components::JointForceCmd({0})));
       }
 
       // yaw joint position
@@ -414,8 +415,9 @@ void GimbalControllerPlugin::PreUpdate(const UpdateInfo &_info,
 
       if (yjfcComp == nullptr)
       {
-         yjfcComp = _ecm.Component<components::JointForceCmd>(_ecm.CreateComponent(
-            this->dataPtr->yawJoint, components::JointForceCmd({0})));
+         yjfcComp = _ecm.Component<components::JointForceCmd>(
+            _ecm.CreateComponent(this->dataPtr->yawJoint,
+               components::JointForceCmd({0})));
       }
 
       // roll joint position
@@ -428,8 +430,9 @@ void GimbalControllerPlugin::PreUpdate(const UpdateInfo &_info,
 
       if (rjfcComp == nullptr)
       {
-         rjfcComp = _ecm.Component<components::JointForceCmd>(_ecm.CreateComponent(
-            this->dataPtr->rollJoint, components::JointForceCmd({0})));
+         rjfcComp = _ecm.Component<components::JointForceCmd>(
+         _ecm.CreateComponent(this->dataPtr->rollJoint,
+            components::JointForceCmd({0})));
       }
 
       static int i = 1000;
@@ -455,7 +458,7 @@ void GimbalControllerPlugin::PreUpdate(const UpdateInfo &_info,
 }
 
 ////////////////////////////////////////////////////////////////////////////
-double GimbalControllerPluginPrivate::NormalizeAbout(double _angle, 
+double GimbalControllerPluginPrivate::NormalizeAbout(double _angle,
    double reference)
 {
    double diff = _angle - reference;
@@ -472,7 +475,7 @@ double GimbalControllerPluginPrivate::NormalizeAbout(double _angle,
 }
 
 ///////////////////////////////////////////////////////////////////////////
-double GimbalControllerPluginPrivate::ShortestAngularDistance(double _from, 
+double GimbalControllerPluginPrivate::ShortestAngularDistance(double _from,
    double _to)
 {
    return this->NormalizeAbout(_to, _from) - _from;
