@@ -369,12 +369,6 @@ void GimbalControllerPlugin::PreUpdate(const ignition::gazebo::UpdateInfo &_info
       // Time delta
       std::chrono::duration<double> dt  = (this->dataPtr->lastControllerUpdateTime - _info.simTime);
 
-      // apply forces to move gimbal
-      // for pitch
-      auto pitchJointPos = _ecm.Component<components::JointPosition>(this->dataPtr->pitchJoint);
-      double pitchError = pitchJointPos->Data().at(0) - this->dataPtr->pitchCommand;
-      double pitchForce = this->dataPtr->pitchPid.Update(pitchError, dt);
-
       ignition::gazebo::components::JointForceCmd* pjfcComp = nullptr;
       pjfcComp = _ecm.Component<components::JointForceCmd>(this->dataPtr->pitchJoint);
 
@@ -384,11 +378,6 @@ void GimbalControllerPlugin::PreUpdate(const ignition::gazebo::UpdateInfo &_info
             components::JointForceCmd({0})));
       }
 
-      // for yaw
-      auto yawJointPos = _ecm.Component<components::JointPosition>(this->dataPtr->yawJoint);
-      double yawError = yawJointPos->Data().at(0) - this->dataPtr->yawCommand;
-      double yawForce = this->dataPtr->yawPid.Update(yawError, dt);
-
       ignition::gazebo::components::JointForceCmd* yjfcComp = nullptr;
       yjfcComp = _ecm.Component<components::JointForceCmd>(this->dataPtr->yawJoint);
 
@@ -397,11 +386,6 @@ void GimbalControllerPlugin::PreUpdate(const ignition::gazebo::UpdateInfo &_info
          yjfcComp = _ecm.Component<components::JointForceCmd>(_ecm.CreateComponent(this->dataPtr->yawJoint,
             components::JointForceCmd({0})));
       }
-
-      // for roll
-      auto rollJointPos = _ecm.Component<components::JointPosition>(this->dataPtr->rollJoint);
-      double rollError = rollJointPos->Data().at(0) - this->dataPtr->rollCommand;
-      double rollForce = this->dataPtr->rollPid.Update(rollError, dt);
 
       ignition::gazebo::components::JointForceCmd* rjfcComp = nullptr;
       rjfcComp = _ecm.Component<components::JointForceCmd>(this->dataPtr->rollJoint);
