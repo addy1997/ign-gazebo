@@ -32,7 +32,25 @@ namespace systems
 {
     // Forward declaration
     class GimbalControllerPluginPrivate;
-    /// \brief A plugin that simulates lift and drag.
+
+    /// \brief Plugin for controlling a 3-link gimbal or similar system.
+    /// This plugin, in response to the String messages coming from 
+    /// OnYawStringMsg, OnRollStringMsg, and OnPitchStringMsg functions,
+    /// tilts the corresponding joints at a particular rate.
+    ///
+    /// This system processes the following sdf parameters:
+    ///
+    /// #Parameters
+    ///
+    /// '<joint_yaw></joint_yaw>': Name of the link linking the yaw_joint 
+    ///                            to it's parent link.
+    /// 
+    /// '<joint_roll></joint_roll>': Name of the link linking the roll_joint 
+    ///                              to it's parent link.
+    /// 
+    /// '<joint_pitch></joint_pitch>': Name of the link linking the pitch_joint 
+    ///                                to it's parent link.
+
     class GimbalControllerPlugin :
         public System,
         public ISystemConfigure,
@@ -42,7 +60,7 @@ namespace systems
        public: GimbalControllerPlugin();
 
        /// \brief Destructor.
-       public: ~GimbalControllerPlugin() override;
+       public: ~GimbalControllerPlugin();
 
        // Documentation inherited
        public: void Configure(const Entity &_entity,
