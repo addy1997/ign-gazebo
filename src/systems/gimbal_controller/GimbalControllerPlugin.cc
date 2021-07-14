@@ -185,19 +185,19 @@ void GimbalControllerPlugin::Configure(const Entity &_entity,
 {
    this->dataPtr->model = ignition::gazebo::Model(_entity);
 
-   std::string yawJointName = "rev_joint_1";
+   std::string yawJointName;
    this->dataPtr->yawJoint = this->dataPtr->model.JointByName(
-      _ecm, "yawJointName");
+      _ecm, yawJointName);
 
    if(_sdf->HasElement("joint_yaw"))
    {
       // Add names to map
       yawJointName = _sdf->Get<std::string>("joint_yaw");
 
-      if(this->dataPtr->model.JointByName(_ecm, "yawJointName"))
+      if(this->dataPtr->model.JointByName(_ecm, yawJointName))
       {
          this->dataPtr->yawJoint = this->dataPtr->model.JointByName(
-            _ecm, "yawJointName");
+            _ecm, yawJointName);
       }
       else
       {
@@ -213,19 +213,19 @@ void GimbalControllerPlugin::Configure(const Entity &_entity,
    }
 
    // for roll joint
-   std::string rollJointName = "rev_joint_2";
+   std::string rollJointName;
    this->dataPtr->rollJoint = this->dataPtr->model.JointByName(
-      _ecm, "rollJointName");
+      _ecm, rollJointName);
 
    if(_sdf->HasElement("joint_roll"))
    {
       // Add names to map
       rollJointName = _sdf->Get<std::string>("joint_roll");
 
-      if(this->dataPtr->model.JointByName(_ecm, "rollJointName"))
+      if(this->dataPtr->model.JointByName(_ecm, rollJointName))
       {
          this->dataPtr->rollJoint = this->dataPtr->model.JointByName(
-            _ecm, "rollJointName");
+            _ecm, rollJointName);
       }
       else
       {
@@ -241,18 +241,18 @@ void GimbalControllerPlugin::Configure(const Entity &_entity,
    }
 
    // for pitch joint
-   std::string pitchJointName = "rev_joint_3";
+   std::string pitchJointName;
    this->dataPtr->pitchJoint = this->dataPtr->model.JointByName(
-      _ecm, "pitchJointName");
+      _ecm, pitchJointName);
 
    if(_sdf->HasElement("joint_pitch"))
    {
       // Add names to map
       pitchJointName = _sdf->Get<std::string>("joint_pitch");
-      if(this->dataPtr->model.JointByName(_ecm, "pitchJointName"))
+      if(this->dataPtr->model.JointByName(_ecm, pitchJointName))
       {
          this->dataPtr->pitchJoint = this->dataPtr->model.JointByName(
-            _ecm, "picthJointName");
+            _ecm, picthJointName);
       }
       else
       {

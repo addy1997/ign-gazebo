@@ -1,7 +1,9 @@
 <?xml version="1.0" ?>
+<!--
+  Ignition gazebo demo using IMU sensor for Gimbal
+-->
 <sdf version="1.6">
-  <world name="gimbal">
-
+  <world name="gimbal_system">
     <physics name="1ms" type="ignored">
       <max_step_size>0.001</max_step_size>
       <real_time_factor>1.0</real_time_factor>
@@ -76,7 +78,7 @@
       </link>
     </model>
 
-    <model name='gimbel'>
+    <model name='gimbal'>
       <link name='base_link'>
         <inertial>
           <mass>2.42736</mass>
@@ -279,7 +281,7 @@
           </ode>
         </physics>
       </joint>
-      <joint name='base_link_JOINT' type='revolute'>
+      <joint name='rev_joint_1' type='revolute'>
         <parent>base_link</parent>
         <child>link_3</child>
         <pose frame=''>0 0 0 0 -0 0</pose>
@@ -312,7 +314,7 @@
           </ode>
         </physics>
       </joint>
-      <joint name='base_link_JOINT_0' type='fixed'>
+      <joint name='fix_joint_1' type='fixed'>
         <parent>base_link</parent>
         <child>link_2</child>
         <pose frame=''>0 0 0 0 -0 0</pose>
@@ -334,7 +336,7 @@
         <child>base_link</child>
         <pose frame=''>0 0 0 0 -0 0</pose>
       </joint>
-      <joint name='link_4_JOINT_2' type='revolute'>
+      <joint name='rev_joint_2' type='revolute'>
         <parent>link_3</parent>
         <child>link_4</child>
         <pose frame=''>0 0 0 0 -0 0</pose>
@@ -370,9 +372,9 @@
 
       <plugin filename="ignition-gazebo-gimbalcontrollerplugin-system"
         name="ignition::gazebo::systems::GimbalControllerPlugin">
-        <joint_yaw></joint_yaw>
-        <joint_roll></joint_roll>
-        <joint_pitch></joint_pitch>
+        <joint_yaw>yaw_joint</joint_yaw>
+        <joint_roll>rev_joint_2</joint_roll>
+        <joint_pitch>fix_joint_1</joint_pitch>
       </plugin>
     </model>
   </world>
