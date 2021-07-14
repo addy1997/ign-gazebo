@@ -400,9 +400,8 @@ void GimbalControllerPlugin::PreUpdate(const UpdateInfo &_info,
 
       if (pjfcComp == nullptr)
       {
-         pjfcComp = _ecm.Component<components::JointForceCmd>(
-            _ecm.CreateComponent(this->dataPtr->pitchJoint,
-               components::JointForceCmd({0})));
+        *pjfcComp = ignition::gazebo::components::JointForceCmd(
+          <joint_force_cmd>);
       }
 
       // yaw joint position
