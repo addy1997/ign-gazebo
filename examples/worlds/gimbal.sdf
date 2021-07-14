@@ -374,7 +374,7 @@
         name="ignition::gazebo::systems::GimbalControllerPlugin">
         <joint_yaw>yaw_joint</joint_yaw>
         <joint_roll>rev_joint_2</joint_roll>
-        <joint_pitch>fix_joint_1</joint_pitch>
+        <joint_pitch>rev_joint_1</joint_pitch>
       </plugin>
     </model>
   </world>
